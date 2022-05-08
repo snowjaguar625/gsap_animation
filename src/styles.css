@@ -8,11 +8,12 @@ body {
   height: 100vh;
   margin: 0;
   background: black;
-  overflow: hidden;
+  overflow-x: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 canvas {
   position: absolute;
   top:0;
@@ -25,39 +26,119 @@ canvas {
   align-items: center;
   padding: 20px;
   flex-direction: column;
-  
 }
 .button {
   color: white;
   display: inline-block;
-  font-weight: bold;
   word-spacing: normal;
-  letter-spacing: 5px;
+  letter-spacing: 2px;
   background: black;
   cursor: pointer;
     
   box-sizing: border-box;
-  width: 150px;
-  height: 58px;
-  border: 2px solid #FFFFFF;
+  padding: 0px 15px;
+  border: 1px solid #FFFFFF;
   border-radius: 5px;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 15px;
   line-height: 28px;
   align-items: center;
   display: flex;
   justify-content: center;
 }
 
-#log_img{
+#logo_img{
   width: 20vw;
   margin-bottom: 10vh;
 }
+/* 
+#logo_img{
+  width: 3vw;
+  margin-bottom: 10vh;
+  position: absolute;
+  left: 35px;
+  top: 20px;
+} */
 
 #mouse_track {
   height: 100vh;
   width: 100vw;
   z-index: 56789;
+}
+
+#navbar{
+  display: flex;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  justify-content: space-between;
+  transform: scaleY(0);
+}
+
+#navbar p{
+  font-style: normal;
+  font-size: 18px;
+  color: #5571FF;
+  margin-left: 62px;
+  letter-spacing: 1px;
+  font-family: system-ui;
+  cursor: pointer;
+}
+#navbar p span{
+ font-weight: 900;
+}
+
+#navbar #contact_btn{
+  margin: 13px 25px;
+}
+
+#about_txt{
+  width: 73vw;
+  font-size: 29px;
+  line-height: 47px;
+  text-align: center;
+  color: #FFFFFF;
+  position: absolute;
+  top: 28vh;
+  /* opacity: 0; */
+  transform: scale(0);
+}
+
+#about_btn{
+  position: absolute;
+  top:62vh;
+  transform: scale(0);
+  display: none;
+}
+
+#projects_area{
+  position: absolute;
+  left: 0;
+  top: 3vw;
+  font-size: 20px;
+  color: #FFFFFF;
+  transform: scaleY(0);
+  display: none;
+}
+
+#projects_area p{
+  width: 39vw;
+  margin:3vw;
+}
+
+#projects_area .item-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 3vw;
+}
+
+#projects_area .item{
+  cursor: pointer;
+  width: 30vw;
+  height: 30vw;
+  background: #C4C4C4;
+  margin-bottom: 5vw;
 }
