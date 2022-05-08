@@ -181,7 +181,7 @@ export const App = () => {
       starGeo.attributes.position.needsUpdate = true;
       stars.rotation.z -= 0.0004;
 
-      // camera.position.set(cursor.x, cursor.y, 0);
+      camera.position.set(cursor.x, cursor.y, 0);
 
       const time = Date.now() * 0.00005;
       const h = ( 360 * ( 1.0 + time ) % 360 ) / 360;
