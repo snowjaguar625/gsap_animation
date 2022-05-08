@@ -80,7 +80,7 @@ export const App = () => {
         );
       });
 
-    const sprite = new THREE.TextureLoader().load('assets/img/disc.png');
+    const sprite = new THREE.TextureLoader().load('assets/img/disc_new.png');
     const starGeo = new THREE.BufferGeometry().setFromPoints(points);
     // const canvas2 = document.createElement( 'canvas' );
     // canvas2.width = 128;
@@ -91,16 +91,18 @@ export const App = () => {
     // context.fill();
     // const texture = new THREE.CanvasTexture( canvas2 );
     starMaterial = new THREE.PointsMaterial({
-      size: 1,
+      size: 3,
       map: sprite,
       transparent: true,
       sizeAttenuation: true,
       opacity: 0.7,
-      precision: "highp"
+      precision: "highp",
+      fog: true
     });
     starMaterial.color.setHSL( 1.0, 0.3, 0.7 );
-
+    
     const stars = new THREE.Points(starGeo, starMaterial);
+
     scene.add(stars);
     
     // Mousemove
@@ -179,7 +181,7 @@ export const App = () => {
       starGeo.attributes.position.needsUpdate = true;
       stars.rotation.z -= 0.0004;
 
-      camera.position.set(cursor.x, cursor.y, 0);
+      // camera.position.set(cursor.x, cursor.y, 0);
 
       const time = Date.now() * 0.00005;
       const h = ( 360 * ( 1.0 + time ) % 360 ) / 360;
