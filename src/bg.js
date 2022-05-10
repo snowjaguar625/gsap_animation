@@ -6,12 +6,8 @@ import gsap from 'gsap';
 
 export const Bg = ({canvas}) => {
     const refCursorCanvas = canvas;
-    
+
     const { gl, size, scene, camera } = useThree();
-
-    // const inputElement = useRef();
-
-    // let mouse = new THREE.Vector3(0, 0, 1);
 
     const sizes = {
         width: window.innerWidth,
