@@ -14,11 +14,25 @@ body {
   align-items: center;
 }
 
-canvas {
+.wrapper{
+  width: 100vw;
+  height:100vh;
   position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+body>*:not(#root){
+  z-index: 12;
+}
+canvas {
+  position: fixed;
+  background-color: transparent!important;
+  width: 100vw;
+  height: 100vh;
   top:0;
   left:0;
-  z-index: -100;
+  z-index: 0;
 }
 .button-wrapper {
   display: flex;
@@ -61,12 +75,6 @@ canvas {
   left: 35px;
   top: 20px;
 } */
-
-#mouse_track {
-  height: 100vh;
-  width: 100vw;
-  z-index: 56789;
-}
 
 #navbar{
   display: flex;
