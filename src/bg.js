@@ -146,7 +146,7 @@ export const Bg = ({canvas}) => {
               float final = diffuse + scatter;
               vec3 ambient = vec3(0.05, 0, 0.15);
               vec3 color = vec3(final, 0.0, 0.0);
-              gl_FragColor = vec4(color, 1.0);
+              gl_FragColor = vec4(color, 1.0) * 0.3;
             }`
           });
 
@@ -156,7 +156,7 @@ export const Bg = ({canvas}) => {
             cursor_material
         );
 
-        const temp = new THREE.SphereBufferGeometry(0.7, 20, 20);
+        const temp = new THREE.SphereBufferGeometry(0.5, 20, 20);
         const cursor_light = new THREE.Mesh(
           temp,
             new THREE.MeshBasicMaterial({ color: 0xffffff })
@@ -169,13 +169,13 @@ export const Bg = ({canvas}) => {
         scene.add(cursor_light);
     ///////////////cusor-e-0.5
 
-        const points = Array(5000)
+        const points = Array(1000)
         .fill(0)
         .map(() => {
             return new THREE.Vector3(
-            Math.random() * 600 - 300,
-            Math.random() * 600 - 300,
-            Math.random() * 300
+            Math.random() * 300 - 150,
+            Math.random() * 300 - 150,
+            Math.random() * 200
             );
         });
 
