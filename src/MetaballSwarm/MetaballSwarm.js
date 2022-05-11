@@ -5,29 +5,6 @@ import { Object3D, Vector2, Vector3 } from 'three'
 import CreateMetaballMaterial from './MetaballMaterial'
 
 /////////////////////
-console.log("check")
-function pixelShader() {
-  var support = true;
-  try {
-    var canvas = document.getElementsByTagName('canvas')[0]
-    var gl = canvas.getContext("webgl")
-    var shaderType = [gl.VERTEX_SHADER,gl.FRAGMENT_SHADER]
-    var precisionType = [gl.LOW_FLOAT, gl.MEDIUM_FLOAT, gl.HIGH_FLOAT, gl.LOW_INT, gl.MEDIUM_INT, gl.HIGH_INT]
-    shaderType.forEach(function(shader){
-      precisionType.forEach(function(precision){
-        gl.getShaderPrecisionFormat(shader,precision)
-      })
-    })
-  } catch (error) {
-    if (error)
-      {
-        support = false;
-      }
-  }
-  return support;
-}
-console.log(pixelShader());
-/////////////////////
 const MetaballSwarm = () => {
   const { gl, size } = useThree()
   const pixelRatio = gl.getPixelRatio()

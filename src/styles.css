@@ -50,7 +50,7 @@ canvas {
   cursor: pointer;
     
   box-sizing: border-box;
-  padding: 0px 15px;
+  padding: 5px 25px;
   border: 1px solid #FFFFFF;
   border-radius: 5px;
   font-family: 'Roboto';
