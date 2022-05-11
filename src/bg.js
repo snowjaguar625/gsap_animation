@@ -274,7 +274,7 @@ export const Bg = ({canvas}) => {
         ///////
         hoverMouse($('.button'));
         const logo_scale = 0.13;
-        let logo_tween, about_text, navbar;
+        let logo_tween, about_text, navbar, project_page, aboutBtn;
         let logo_move_x = $('#logo_img').offset().left + $('#logo_img').width()/2 * (1-logo_scale) - 20;
         let logo_move_y = $('#logo_img').offset().top + $('#logo_img').height()/2 * (1-logo_scale) + 1;
         
@@ -283,22 +283,25 @@ export const Bg = ({canvas}) => {
             logo_tween = gsap.to("#logo_img", {rotation: 360, scale: logo_scale, x: -logo_move_x, y: -logo_move_y, duration: 0.5, ease: "easeOut"});
             about_text = gsap.to($("#about_txt"), {scale:1, duration: 0.5});
             navbar = gsap.to($('#navbar'), {duration: 0.5, scaleY:1, ease: "power4.out"})
+            aboutBtn = gsap.to($("#about_btn"), {scale:1, duration: 0.5});
             $("#about_btn").css('display', 'block');
-            gsap.to($("#about_btn"), {scale:1, duration: 0.5});
         });
         $('#about_btn').click(function(){
-            $(this).css('display', 'none');
-            about_text.reverse();
-            $("#projects_area").css('display', 'block');
-            gsap.to($("#projects_area"), {scaleY:1, duration: 1});
+          aboutBtn.reverse();
+          $(this).css('display', 'none');
+          about_text.reverse();
+          $("#projects_area").css('display', 'block');
+          project_page = gsap.to($("#projects_area"), {scaleY:1, duration: 1});
         });
         $("#brand").click(function(){
-            $("#about_btn").css('display', 'none');
-            about_text.reverse();
-            $("#projects_area").css('display', 'none');
-            logo_tween.reverse();
-            $('#hello_btn').css("display", "block");
-            navbar.reverse();
+          aboutBtn.reverse();
+          $("#about_btn").css('display', 'none');
+          about_text.reverse();
+          project_page.reverse();
+          $("#projects_area").css('display', 'none');
+          logo_tween.reverse();
+          $('#hello_btn').css("display", "block");
+          navbar.reverse();
         })
         
     }, []);
