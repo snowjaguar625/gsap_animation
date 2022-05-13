@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useEffect } from 'react'
+import React, { useRef, useMemo, useEffect, memo } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from "three";
 import  $ from 'jquery';
@@ -30,17 +30,17 @@ function pixelShader() {
 }
 console.log(pixelShader());
 
-export const Bg = ({canvas}) => {
+export const Bg = ({ particlehidefunc }) => {
+    console.log("%%% bg component is rendered.");
+    const {canvas, gl, size, scene, camera } = useThree();
     const sizes = {
         width: window.innerWidth,
         height: window.innerHeight
     };
-    const refCursorCanvas = canvas;
     // const renderer = new THREE.WebGLRenderer();
-    const renderer = new THREE.WebGLRenderer({canvas: canvas.current});
+    const renderer = new THREE.WebGLRenderer({canvas: canvas});
     renderer.setSize(sizes.width, sizes.height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 4));
-    const { gl, size, scene, camera } = useThree();
     camera.position.z = 150;
 
     ////////////cursor-s
@@ -241,7 +241,7 @@ export const Bg = ({canvas}) => {
                 }
             }
             starGeo.attributes.position.needsUpdate = true;
-            stars.rotation.z -= 0.0004;
+            stars.rotation.z -= 0.0003;
 
             // camera.position.set(cursor.x, cursor.y, 2);
 
@@ -292,6 +292,8 @@ export const Bg = ({canvas}) => {
           about_text.reverse();
           $("#projects_area").css('display', 'block');
           project_page = gsap.to($("#projects_area"), {scaleY:1, duration: 1});
+          particlehidefunc(false);
+
         });
         $("#brand").click(function(){
           aboutBtn.reverse();
@@ -302,6 +304,7 @@ export const Bg = ({canvas}) => {
           logo_tween.reverse();
           $('#hello_btn').css("display", "block");
           navbar.reverse();
+          particlehidefunc(true);
         })
         
     }, []);
@@ -313,7 +316,7 @@ export const Bg = ({canvas}) => {
     
 }
 
-export default Bg
+export default memo(Bg)
 
 var hoverMouse = function($el) {
     $el.each(function() {
