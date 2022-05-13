@@ -8,7 +8,7 @@ import fragmentShader from './shaders/fragment.glsl';
 
 
 /////////////////////
-console.log("check")
+console.log("check");
 function pixelShader() {
   var support = true;
   try {
@@ -31,7 +31,6 @@ function pixelShader() {
 console.log(pixelShader());
 
 export const Bg = ({ particlehidefunc }) => {
-    console.log("%%% bg component is rendered.");
     const {canvas, gl, size, scene, camera } = useThree();
     const sizes = {
         width: window.innerWidth,
@@ -168,19 +167,26 @@ export const Bg = ({ particlehidefunc }) => {
         scene.add(cursor_raycastPlane);
         scene.add(cursor_light);
     ///////////////cusor-e-0.5
-
+        const colors = [];
+        const color = new THREE.Color();
         const points = Array(1000)
         .fill(0)
         .map(() => {
+          color.setRGB(Math.random(), Math.random(), Math.random())
+          colors.push( color.r, color.g, color.b );
+
             return new THREE.Vector3(
             Math.random() * 300 - 150,
             Math.random() * 300 - 150,
             Math.random() * 200
             );
         });
+        console.log("color is ")
+        console.log(colors)
 
         const sprite = new THREE.TextureLoader().load('assets/img/disc_new.png');
         const starGeo = new THREE.BufferGeometry().setFromPoints(points);
+        starGeo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
         let starMaterial = new THREE.PointsMaterial({
             size: 2,
             map: sprite,
@@ -188,9 +194,10 @@ export const Bg = ({ particlehidefunc }) => {
             sizeAttenuation: true,
             opacity: 0.7,
             precision: "highp",
-            fog: true
+            fog: true,
+            vertexColors: true
         });
-        starMaterial.color.setHSL( 1.0, 0.3, 0.7 );
+        // starMaterial.color.setHSL( 1.0, 0.3, 0.7 );
         
         const stars = new THREE.Points(starGeo, starMaterial);
         // stars.attributes.position.z = 0;
@@ -245,9 +252,9 @@ export const Bg = ({ particlehidefunc }) => {
 
             // camera.position.set(cursor.x, cursor.y, 2);
 
-            const time = Date.now() * 0.00005;
-            const h = ( 360 * ( 1.0 + time ) % 360 ) / 360;
-            starMaterial.color.setHSL( h, 0.5, 0.5 );
+            // const time = Date.now() * 0.00005;
+            // const h = ( 360 * ( 1.0 + time ) % 360 ) / 360;
+            // starMaterial.color.setHSL( h, 0.5, 0.5 );
 
             //////////////////cursor-s-3
             tmp.copy(eMouse).sub(elasticMouse).multiplyScalar(0.15);
@@ -309,11 +316,7 @@ export const Bg = ({ particlehidefunc }) => {
         
     }, []);
 
-    return (
-        <>
-        </>
-      )
-    
+    return (<></>)
 }
 
 export default memo(Bg)

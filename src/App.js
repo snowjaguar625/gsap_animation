@@ -49,33 +49,31 @@ function mouseTowoldCoordinate(camera, mouse){
   return position
 }
 
-function Swarm({ mouse, pastate, tmp_state }) {
-  console.log("###Swarm is rendered.")
-  const { camera, size, viewport } = useThree();
-  const aspect = size.width / viewport.width;
+function Swarm({ mousemove, tmp_state }) {
+  const { camera, mouse, size, viewport } = useThree();
   const light = useRef()
   const [geometry, geometryRef] = useState()
   const [material, materialRef] = useState();
-  let mouse_coordd_x;
-  let mouse_coordd_y;
-  let flag_state = true;
+  // let mouse_coordd_x;
+  // let mouse_coordd_y;
   useFrame(() => {
-    mouse_coordd_x = mouseTowoldCoordinate(camera, mouse).x;
-    mouse_coordd_y = mouseTowoldCoordinate(camera, mouse).y;
-    light.current.position.set(mouse_coordd_x, mouse_coordd_y, 100);
+    // mouse_coordd_x = mouseTowoldCoordinate(camera, mousemove).x;
+    // mouse_coordd_y = mouseTowoldCoordinate(camera, mousemove).y;
+    // light.current.position.set(mouse_coordd_x, mouse_coordd_y, 10);
+    light.current.position.set(mouse.x, mouse.y, 100);
     material.transparent = tmp_state.current;
   })
   return (
     <>
-      <pointLight ref={light} distance={50} intensity={2.5} color="red" />
+      <pointLight ref={light} distance={50} intensity={0.5} color="red" />
       <spotLight intensity={0.5} position={[50, -50, 140]} penumbra={1} />
-      {/* <mesh>
+      <mesh>
         <planeGeometry attach="geometry" args={[500, 500]} />
         <meshPhongMaterial attach="material" color="#575757" depthTest={false} />
-      </mesh> */}
+      </mesh>
       <dodecahedronBufferGeometry ref={geometryRef} args={[0.8, 0]} />
-      <meshPhysicalMaterial ref={materialRef} transparent={flag_state} opacity={0} />
-      {geometry && new Array(200).fill().map((_, index) => <Particle key={index} mouse={mouse} material={material} geometry={geometry} />)}
+      <meshPhysicalMaterial ref={materialRef} transparent={true} opacity={0} />
+      {geometry && new Array(200).fill().map((_, index) => <Particle key={index} mouse={mousemove} material={material} geometry={geometry} />)}
     </>
   )
 }
@@ -95,30 +93,15 @@ function Effect() {
   )
 }
 
-/////////
-
-
-
 export const App = () => {
 
   ///////////////////////work page -s
   const mouse = useRef([0, 0])
   const tmp_state = useRef(true);
   // const onMouseMove = useCallback(({ clientX: x, clientY: y }) => { mouse.current = [x, y]}, [])
- 
-  const [pastate, setPastate] = useState(true);
-  console.log("&&&&this is rendered by state change");
-  console.log("state value is : ", pastate)
-
   ///////////////////////work page -e
   
-  // const particlehidefunc = useCallback(() => {(state) => {
-  //   console.log("function is called. enter: ", state)
-  //   setPastate(state)
-  // }}, [pastate]);
   const particlehidefunc = (state) => {
-  console.log("!!!!function is called. enter: ", state)
-    // setPastate(state);
     tmp_state.current = state;
   };
 
@@ -140,7 +123,7 @@ export const App = () => {
               <Effects />
             </Suspense> */}
             <Bg particlehidefunc={particlehidefunc}/>
-            <Swarm mouse={mouse} tmp_state = {tmp_state}  pastate={pastate}/>
+            <Swarm mousemove={mouse} tmp_state = {tmp_state}/>
             <Effect />
           </Canvas>
         </div>
